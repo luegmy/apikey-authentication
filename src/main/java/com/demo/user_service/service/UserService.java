@@ -4,6 +4,6 @@ import com.demo.user_service.controller.dto.UserDTO;
 import com.demo.user_service.service.model.User;
 
 public interface UserService {
-    User createUser(UserDTO userDTO);
-    boolean authenticate(String username, String rawPassword);
+    User createUser(UserDTO userDTO, String apikey);
+
 }

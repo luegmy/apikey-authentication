@@ -1,5 +1,8 @@
 package com.demo.user_service.controller;
 
+import com.demo.user_service.exceptions.InvalidApiKeyException;
+import com.demo.user_service.exceptions.InvalidPasswordException;
+import com.demo.user_service.exceptions.NotFoundUsernameException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -22,5 +25,22 @@ public class GlobalExceptionHandler {
             errors.put(fieldName, errorMessage);
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidApiKeyException.class)
+    public ResponseEntity<Object> handleValidationExceptions(InvalidApiKeyException ex) {
+        return new ResponseEntity<>(ex.getMessage(), ex.getStatus());
+    }
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<Object> handleValidationExceptions(InvalidPasswordException ex) {
+        return new ResponseEntity<>(ex.getMessage(), ex.getStatus());
+    }
+    @ExceptionHandler(NotFoundUsernameException.class)
+    public ResponseEntity<Object> handleValidationExceptions(NotFoundUsernameException ex) {
+        return new ResponseEntity<>(ex.getMessage(), ex.getStatus());
+    }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> handleValidationExceptions(IllegalArgumentException ex) {
+        return new ResponseEntity<>(ex.getMessage(),HttpStatus.CONFLICT);
     }
 }

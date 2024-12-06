@@ -20,20 +20,7 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO, @RequestHeader("API-Key") String apiKey) {
-        validateApiKey(apiKey);
-        return ResponseEntity.ok(userMapper.toDTO(userService.createUser(userDTO)));
+        return ResponseEntity.ok(userMapper.toDTO(userService.createUser(userDTO,apiKey)));
     }
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<Boolean> authenticate(@RequestBody UserDTO userDTO, @RequestHeader("API-Key") String apiKey) {
-        validateApiKey(apiKey);
-        boolean authenticated = userService.authenticate(userDTO.getUsername(), userDTO.getPassword());
-        return ResponseEntity.ok(authenticated);
-    }
-
-    private void validateApiKey(String apiKey) {
-        if (!"secure-api-key".equals(apiKey)) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid API Key");
-        }
-    }
 }

@@ -11,7 +11,11 @@ import org.mapstruct.factory.Mappers;
 public interface UserMapper {
 
     UserMapper INSTANCE= Mappers.getMapper(UserMapper.class);
-
+    @Mapping(target = "username", source = "username")
+    @Mapping(target = "password", source = "password")
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "email", source = "email")
+    @Mapping(target = "role", source = "role")
     User toUser(UserEntity userEntity);
 
     UserDTO toDTO(User user);
