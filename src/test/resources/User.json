@@ -1,7 +1,18 @@
 {
-  "username" : "testUser",
-  "password" : "password123",
-  "name" : "jhonny neyra",
-  "email" : "jneyra@gmail.com",
-  "role" : "user"
+  "username": "testUser",
+  "password": "password123",
+  "enabled": true,
+  "accountNoExpired": true,
+  "accountNoLocked": true,
+  "credentialsNoExpired": true,
+  "roles": [
+    {
+      "rol": "ADMIN",
+      "permissions": [
+        {
+          "permission": "Create"
+        }
+      ]
+    }
+  ]
 }

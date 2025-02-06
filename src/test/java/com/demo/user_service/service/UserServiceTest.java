@@ -2,12 +2,11 @@ package com.demo.user_service.service;
 
 
 import com.demo.user_service.UserServiceApplicationTests;
-import com.demo.user_service.controller.dto.UserDTO;
-import com.demo.user_service.exceptions.InvalidApiKeyException;
+import com.demo.user_service.dto.UserDTO;
+import com.demo.user_service.exception.InvalidApiKeyException;
 import com.demo.user_service.mapper.UserMapper;
-import com.demo.user_service.repository.UserRepository;
-import com.demo.user_service.repository.entity.UserEntity;
-import com.demo.user_service.service.model.User;
+import com.demo.user_service.persistence.repository.UserRepository;
+import com.demo.user_service.persistence.entity.UserEntity;
 import com.demo.user_service.util.Util;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,18 +38,16 @@ public class UserServiceTest extends UserServiceApplicationTests {
         String validApiKey = "valid-api-key";
 
         doNothing().when(util).validateApiKey(anyString());
+        when(userMapper.toUserEntity(any(UserDTO.class))).thenReturn(convertToObject("/User.json", UserEntity.class));
         when(userRepository.save(any(UserEntity.class))).thenReturn(convertToObject("/User.json", UserEntity.class));
-        when(userMapper.toUser(any(UserEntity.class))).thenReturn(convertToObject("/User.json", User.class));
 
         // Acción
-        User result = userService.createUser(convertToObject("/User.json", UserDTO.class), validApiKey);
+        userService.createUser(convertToObject("/User.json", UserDTO.class), validApiKey);
 
         // Verificación
-        assertNotNull(result);
-        assertEquals("testUser", result.getUsername());
         verify(util, times(1)).validateApiKey(anyString());
         verify(userRepository, times(1)).save(any(UserEntity.class));
-        verify(userMapper, times(1)).toUser(any(UserEntity.class));
+        verify(userMapper, times(1)).toUserEntity(any(UserDTO.class));
     }
 
     @Test

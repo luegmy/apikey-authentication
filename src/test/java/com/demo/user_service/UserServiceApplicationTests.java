@@ -10,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Objects;
 
-@SpringBootTest
 public abstract class UserServiceApplicationTests {
 
     private String getJsonFromPath(String pathJson) throws Exception {

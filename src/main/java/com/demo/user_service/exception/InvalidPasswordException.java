@@ -1,4 +1,4 @@
-package com.demo.user_service.exceptions;
+package com.demo.user_service.exception;
 
 import lombok.Getter;
 import lombok.Setter;

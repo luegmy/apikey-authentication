@@ -1,4 +1,4 @@
-package com.demo.user_service.repository.entity;
+package com.demo.user_service.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,6 +12,6 @@ public class PermissionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true, updatable = false, nullable = false)
-    private String name;
+    @Column(name = "name", unique = true, updatable = false, nullable = false)
+    private String permission;
 }

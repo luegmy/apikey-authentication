@@ -1,13 +1,11 @@
 package com.demo.user_service.service;
 
 import com.demo.user_service.UserServiceApplicationTests;
-import com.demo.user_service.controller.dto.UserDTO;
-import com.demo.user_service.exceptions.InvalidPasswordException;
-import com.demo.user_service.exceptions.NotFoundUsernameException;
+import com.demo.user_service.exception.InvalidPasswordException;
+import com.demo.user_service.exception.NotFoundUsernameException;
 import com.demo.user_service.mapper.UserMapper;
-import com.demo.user_service.repository.UserRepository;
-import com.demo.user_service.repository.entity.UserEntity;
-import com.demo.user_service.service.model.User;
+import com.demo.user_service.persistence.repository.UserRepository;
+import com.demo.user_service.persistence.entity.UserEntity;
 import com.demo.user_service.util.Util;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

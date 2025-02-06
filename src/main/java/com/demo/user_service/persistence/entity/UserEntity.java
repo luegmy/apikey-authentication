@@ -1,4 +1,4 @@
-package com.demo.user_service.repository.entity;
+package com.demo.user_service.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -21,7 +21,7 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
     @Column(name = "is_Enabled")
-    private boolean isEnabled;
+    private boolean enabled;
     @Column(name = "account_No_Expired")
     private boolean accountNoExpired;
     @Column(name = "account_No_Locked")

@@ -1,8 +1,8 @@
 package com.demo.user_service.controller;
 
-import com.demo.user_service.exceptions.InvalidApiKeyException;
-import com.demo.user_service.exceptions.InvalidPasswordException;
-import com.demo.user_service.exceptions.NotFoundUsernameException;
+import com.demo.user_service.exception.InvalidApiKeyException;
+import com.demo.user_service.exception.InvalidPasswordException;
+import com.demo.user_service.exception.NotFoundUsernameException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

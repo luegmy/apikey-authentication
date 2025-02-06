@@ -1,4 +1,4 @@
-package com.demo.user_service.repository.entity;
+package com.demo.user_service.persistence.entity;
 
 
 import lombok.Getter;
