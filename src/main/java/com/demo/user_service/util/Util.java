@@ -1,6 +1,6 @@
 package com.demo.user_service.util;
 
-import com.demo.user_service.exceptions.InvalidApiKeyException;
+import com.demo.user_service.exception.InvalidApiKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 

@@ -1,8 +1,8 @@
 package com.demo.user_service.service;
 
-import com.demo.user_service.exceptions.InvalidPasswordException;
-import com.demo.user_service.exceptions.NotFoundUsernameException;
-import com.demo.user_service.repository.UserRepository;
+import com.demo.user_service.exception.InvalidPasswordException;
+import com.demo.user_service.exception.NotFoundUsernameException;
+import com.demo.user_service.persistence.repository.UserRepository;
 import com.demo.user_service.util.Util;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

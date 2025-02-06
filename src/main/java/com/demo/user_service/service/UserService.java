@@ -1,9 +1,8 @@
 package com.demo.user_service.service;
 
-import com.demo.user_service.controller.dto.UserDTO;
-import com.demo.user_service.service.model.User;
+import com.demo.user_service.dto.UserDTO;
 
 public interface UserService {
-    User createUser(UserDTO userDTO, String apikey);
+    void createUser(UserDTO userDTO, String apikey);
 
 }
