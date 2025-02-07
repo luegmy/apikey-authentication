@@ -1,6 +1,5 @@
 package com.demo.user_service.dto;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -19,5 +18,5 @@ public class UserDTO {
     private boolean accountNoExpired;
     private boolean accountNoLocked;
     private boolean credentialsNoExpired;
-    private List<RoleDTO> roles;
+    private List<RolDTO> roles;
 }

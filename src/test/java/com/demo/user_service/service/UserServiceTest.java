@@ -5,6 +5,9 @@ import com.demo.user_service.UserServiceApplicationTests;
 import com.demo.user_service.dto.UserDTO;
 import com.demo.user_service.exception.InvalidApiKeyException;
 import com.demo.user_service.mapper.UserMapper;
+import com.demo.user_service.persistence.entity.RolEntity;
+import com.demo.user_service.persistence.repository.PermissionRepository;
+import com.demo.user_service.persistence.repository.RolRepository;
 import com.demo.user_service.persistence.repository.UserRepository;
 import com.demo.user_service.persistence.entity.UserEntity;
 import com.demo.user_service.util.Util;
@@ -15,6 +18,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -23,6 +28,10 @@ import static org.mockito.Mockito.*;
 public class UserServiceTest extends UserServiceApplicationTests {
     @Mock
     private UserRepository userRepository;
+    @Mock
+    private RolRepository rolRepository;
+    @Mock
+    private PermissionRepository permissionRepository;
     @Mock
     private PasswordEncoder passwordEncoder;
     @Mock
@@ -39,6 +48,7 @@ public class UserServiceTest extends UserServiceApplicationTests {
 
         doNothing().when(util).validateApiKey(anyString());
         when(userMapper.toUserEntity(any(UserDTO.class))).thenReturn(convertToObject("/User.json", UserEntity.class));
+        when(rolRepository.findByRol(any())).thenReturn(Optional.of(new RolEntity()));
         when(userRepository.save(any(UserEntity.class))).thenReturn(convertToObject("/User.json", UserEntity.class));
 
         // Acción
