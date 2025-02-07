@@ -3,6 +3,8 @@ package com.demo.user_service.service;
 
 import com.demo.user_service.dto.RolDTO;
 import com.demo.user_service.dto.UserDTO;
+import com.demo.user_service.exception.InvalidRolException;
+import com.demo.user_service.exception.UserExistsException;
 import com.demo.user_service.mapper.UserMapper;
 import com.demo.user_service.persistence.entity.PermissionEntity;
 import com.demo.user_service.persistence.entity.RolEntity;
@@ -11,8 +13,8 @@ import com.demo.user_service.persistence.repository.PermissionRepository;
 import com.demo.user_service.persistence.repository.RolRepository;
 import com.demo.user_service.persistence.repository.UserRepository;
 import com.demo.user_service.persistence.entity.UserEntity;
-import com.demo.user_service.util.Util;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,14 +29,12 @@ public class UserServiceImpl implements UserService {
     private RolRepository rolRepository;
     private PermissionRepository permissionRepository;
     private PasswordEncoder passwordEncoder;
-    private Util util;
     private UserMapper userMapper;
 
-    public void createUser(UserDTO userDTO, String apikey) {
-        util.validateApiKey(apikey);
+    public void createUser(UserDTO userDTO) {
         userRepository.findByUsername(userDTO.getUsername())
                 .ifPresent(user -> {
-                    throw new IllegalArgumentException("User already exists: " + userDTO.getUsername());
+                    throw new UserExistsException(HttpStatus.CONFLICT, "User already exists: " + userDTO.getUsername());
                 });
 
         UserEntity userEntity = userMapper.toUserEntity(userDTO);
@@ -61,17 +61,17 @@ public class UserServiceImpl implements UserService {
         try {
             return RolEnum.valueOf(rolDTO.getRol().toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Rol inválido: " + rolDTO.getRol());
+            throw new InvalidRolException(HttpStatus.CONFLICT, "Rol inválid: " + rolDTO.getRol());
         }
     }
 
     private Set<PermissionEntity> createPermissionEntity(RolDTO rolDTO) {
         return rolDTO.getPermissions().stream().map(permissionDTO ->
                 permissionRepository.findByPermission(permissionDTO.getPermission())
-                .orElseGet(() -> {
-                    PermissionEntity permissionEntity = new PermissionEntity();
-                    permissionEntity.setPermission(permissionEntity.getPermission());
-                    return permissionRepository.save(permissionEntity);
-                })).collect(Collectors.toSet());
+                        .orElseGet(() -> {
+                            PermissionEntity permissionEntity = new PermissionEntity();
+                            permissionEntity.setPermission(permissionEntity.getPermission());
+                            return permissionRepository.save(permissionEntity);
+                        })).collect(Collectors.toSet());
     }
 }

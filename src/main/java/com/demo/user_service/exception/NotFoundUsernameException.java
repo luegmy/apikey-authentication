@@ -10,7 +10,7 @@ public class NotFoundUsernameException extends RuntimeException{
     private final String message;
     private final HttpStatus status;
 
-    public NotFoundUsernameException(String message, HttpStatus status) {
+    public NotFoundUsernameException(HttpStatus status, String message) {
         this.message = message;
         this.status = status;
     }

@@ -1,7 +1,7 @@
 package com.demo.user_service.controller;
 
-import com.demo.user_service.exception.InvalidApiKeyException;
-import com.demo.user_service.exception.InvalidPasswordException;
+import com.demo.user_service.exception.UserExistsException;
+import com.demo.user_service.exception.InvalidRolException;
 import com.demo.user_service.exception.NotFoundUsernameException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +27,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(InvalidApiKeyException.class)
-    public ResponseEntity<Object> handleValidationExceptions(InvalidApiKeyException ex) {
+    @ExceptionHandler(UserExistsException.class)
+    public ResponseEntity<Object> handleValidationExceptions(UserExistsException ex) {
         return new ResponseEntity<>(ex.getMessage(), ex.getStatus());
     }
-    @ExceptionHandler(InvalidPasswordException.class)
-    public ResponseEntity<Object> handleValidationExceptions(InvalidPasswordException ex) {
+    @ExceptionHandler(InvalidRolException.class)
+    public ResponseEntity<Object> handleValidationExceptions(InvalidRolException ex) {
         return new ResponseEntity<>(ex.getMessage(), ex.getStatus());
     }
     @ExceptionHandler(NotFoundUsernameException.class)

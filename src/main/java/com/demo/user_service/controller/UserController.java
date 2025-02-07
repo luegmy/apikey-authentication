@@ -18,7 +18,7 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseEntity<Void> createUser(@Valid @RequestBody UserDTO userDTO, @RequestHeader("API-Key") String apiKey) {
-        userService.createUser(userDTO,apiKey);
+        userService.createUser(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
