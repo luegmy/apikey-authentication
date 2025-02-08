@@ -7,6 +7,7 @@ import lombok.Getter;
 public enum RolEnum {
     ADMIN,
     USER,
-    INVITED;
+    INVITED,
+    DEVELOPER
 
 }
