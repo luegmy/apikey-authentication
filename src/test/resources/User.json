@@ -1,0 +1,18 @@
+{
+  "username": "testUser",
+  "password": "password123",
+  "enabled": true,
+  "accountNoExpired": true,
+  "accountNoLocked": true,
+  "credentialsNoExpired": true,
+  "roles": [
+    {
+      "rol": "ADMIN",
+      "permissions": [
+        {
+          "permission": "Create"
+        }
+      ]
+    }
+  ]
+}
